@@ -1,112 +1,152 @@
-# EcoSafe - Sistema de Monitoramento Ambiental
 
-Sistema de monitoramento ambiental com API REST para gestão de usuários, locais e sensores.
+'# 🌱 EcoSafe - Solução Tecnológica para Eventos Climáticos Extremos
 
-## 🚀 Funcionalidades
+## 💡 Sobre o Projeto
 
-- **Autenticação JWT** - Login e registro
-- **CRUD Usuários** - Gestão de usuários
-- **CRUD Locais** - Gestão de localizações
-- **CRUD Sensores** - Gestão de sensores
-- **API REST** - Endpoints com paginação
-- **Documentação Swagger** - API documentada
+**EcoSafe** é uma aplicação desenvolvida como parte do desafio da **Global Solution FIAP 2025**, com o objetivo de criar uma solução tecnológica inovadora para enfrentar **eventos climáticos extremos**.
 
-## 🛠️ Tecnologias
+A proposta foca no **monitoramento de locais sensíveis** por meio de sensores e geração de **alertas automáticos** baseados nas leituras. Com isso, buscamos **ajudar comunidades vulneráveis**, fornecendo **informações em tempo real** para promover ações preventivas e respostas rápidas a desastres naturais.
 
-- **Java 17**
-- **Spring Boot 3.5.0**
-- **Spring Security + JWT**
-- **Spring Data JPA**
-- **Oracle Database**
-- **Bean Validation**
-- **Swagger/OpenAPI**
+A aplicação oferece uma **API RESTful** robusta que gerencia:
 
-## 🗃️ Configuração do Banco de Dados
+- Usuários  
+- Locais  
+- Sensores  
+- Leituras  
+- Alertas em tempo real  
 
-### Oracle Database
-- **Host:** localhost
-- **Porta:** 1521
-- **SID:** xe
-- **Usuário:** ecosafe
-- **Senha:** ecosafe123
+Integra-se a um banco de dados **PostgreSQL** conteinerizado, garantindo portabilidade e escalabilidade.
 
-### Pré-requisitos
-1. Oracle Database 11g+ ou Oracle XE instalado
-2. Criar usuário `ecosafe` com senha `ecosafe123`
-3. Conceder privilégios necessários ao usuário
+---
 
-```sql
--- Comandos SQL para configurar o usuário
-CREATE USER ecosafe IDENTIFIED BY ecosafe123;
-GRANT CONNECT, RESOURCE TO ecosafe;
-GRANT CREATE SESSION TO ecosafe;
-GRANT CREATE TABLE TO ecosafe;
-GRANT CREATE SEQUENCE TO ecosafe;
-```
+## 🛠️ Tecnologias Utilizadas
 
-## 🚀 Como executar
+- ✅ **Java 17**  
+- ✅ **Spring Boot**  
+- ✅ **Spring Data JPA**  
+- ✅ **Swagger (OpenAPI)**  
+- ✅ **PostgreSQL**  
+- ✅ **Docker & Docker Compose**  
+- ✅ **Maven**  
+- ✅ **JWT (Autenticação)**  
+- ✅ **Lombok**  
+
+---
+
+## 🚀 Como Executar o Projeto
+
+### 🔧 Pré-requisitos
+- Java 17+
+- Maven
+- Docker e Docker Compose
+
+---
+
+### 🔨 Build da aplicação
+
+Execute no terminal:
 
 ```bash
-mvn spring-boot:run
+mvn clean package -DskipTests
 ```
 
-**Acessos:**
-- API: http://localhost:8080
-- Swagger: http://localhost:8080/swagger-ui.html
+> 🔸 Esse comando gera o arquivo `.jar` da aplicação, ignorando os testes.
 
-## 🎯 Dados de Exemplo
+---
 
-**O sistema já vem com dados prontos para teste:**
+### 🐳 Subir a aplicação com Docker
 
-### Usuários (senha: `123456`)
-- `admin@ecosafe.com` - Administrador (São Paulo)
-- `joao@ecosafe.com` - João Silva (Rio de Janeiro)  
-- `maria@ecosafe.com` - Maria Santos (Belo Horizonte)
+Execute:
 
-### Locais
-- Centro de Monitoramento SP (São Paulo/SP)
-- Estação Rio de Janeiro (Rio de Janeiro/RJ)
-- Base Belo Horizonte (Belo Horizonte/MG)
+```bash
+docker-compose up --build -d
+```
 
-### Sensores
-- Pluviômetro, Termômetro (São Paulo)
-- Anemômetro, Higrômetro (Rio de Janeiro)
-- Barômetro (Belo Horizonte)
+Esse comando irá:
 
-## 📚 Endpoints
+- Construir a imagem da aplicação (Dockerfile)  
+- Subir o banco de dados PostgreSQL com volume persistente  
+- Executar ambos os containers em segundo plano (`-d`)
 
-### Autenticação
-- `POST /api/auth/login`
-- `POST /api/auth/registro`
+---
 
-### Usuários  
-- `GET /api/usuarios` - Listar (paginado)
-- `POST /api/usuarios` - Criar
-- `GET /api/usuarios/{id}` - Buscar por ID
-- `PUT /api/usuarios/{id}` - Atualizar
-- `DELETE /api/usuarios/{id}` - Deletar
-- `GET /api/usuarios/buscar?nome=` - Buscar por nome
+### 📑 Acessar a API
 
-### Locais
-- `GET /api/locais` - Listar (paginado)
-- `POST /api/locais` - Criar
-- `GET /api/locais/{id}` - Buscar por ID
-- `PUT /api/locais/{id}` - Atualizar
-- `DELETE /api/locais/{id}` - Deletar
-- `GET /api/locais/buscar/cidade?cidade=` - Buscar por cidade
+Com os containers rodando, acesse a documentação interativa via Swagger:
 
-### Sensores
-- `GET /api/sensores` - Listar (paginado)
-- `POST /api/sensores` - Criar
-- `GET /api/sensores/{id}` - Buscar por ID
-- `PUT /api/sensores/{id}` - Atualizar
-- `DELETE /api/sensores/{id}` - Deletar
-- `GET /api/sensores/buscar/tipo?tipo=` - Buscar por tipo
+👉 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
-## 🔒 Autenticação
+---
 
-1. Registre um usuário em `/api/auth/registro`
-2. Faça login em `/api/auth/login`
-3. Use o token: `Authorization: Bearer {token}`
+### 🛑 Parar e remover os containers
 
-**Para teste rápido, use:** `admin@ecosafe.com` / `123456` 
+Execute:
+
+```bash
+docker-compose down -v
+```
+
+> 🔸 Isso irá parar e remover os containers e os volumes, limpando todo o ambiente.
+
+---
+
+## ✅ Funcionalidades Implementadas
+
+- 🔐 Registro e login de usuários com **autenticação JWT**
+- 📍 **Cadastro de locais e sensores**
+- 📈 **Registro de leituras dos sensores**
+- 🚨 **Geração de alertas automáticos** com associação aos usuários
+- 🔄 **CRUD completo** para entidades principais:
+  - Usuário
+  - Local
+  - Sensor
+  - Alerta
+- 🧪 Documentação interativa da API via **Swagger**
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com.ecosafe
+│   │   │       ├── config
+│   │   │       ├── controller
+│   │   │       ├── dto
+│   │   │       ├── model
+│   │   │       ├── repository
+│   │   │       └── service
+│   │   └── resources
+│   │       ├── application.yml
+│   │       └── ...
+├── Dockerfile
+├── docker-compose.yml
+├── README.md
+└── pom.xml
+```
+
+---
+
+## 👥 Equipe
+
+| Nome               | RM        |
+| ------------------ | --------- |
+| [Seu Nome]         | [Seu RM]  |
+| [Integrante 2]     | [RM]      |
+| [Integrante 3]     | [RM]      |
+| [Integrante 4]     | [RM]      |
+
+---
+
+## 📹 Extras
+
+- 🎥 **Vídeo demonstrativo:** [Link aqui (quando disponível)]  
+- 🔗 **Repositório:** [https://github.com/seu-usuario/ecosafe](https://github.com/seu-usuario/ecosafe)  
+
+---
+
+## 🤝 Licença
+
+Este projeto é de uso acadêmico para a FIAP e não possui fins comerciais.'
