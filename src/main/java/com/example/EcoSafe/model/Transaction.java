@@ -49,7 +49,7 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "Usuário é obrigatório")
-    private User user;
+    private Usuario user; // Corrigido de 'User' para 'Usuario'
 
     @Size(max = 500, message = "Observações devem ter no máximo 500 caracteres")
     private String observations;
@@ -85,4 +85,4 @@ public class Transaction {
             return description;
         }
     }
-} 
+}

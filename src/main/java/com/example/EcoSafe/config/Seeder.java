@@ -8,7 +8,6 @@ import com.example.EcoSafe.repository.SensorRepository;
 import com.example.EcoSafe.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,16 +22,13 @@ public class Seeder implements CommandLineRunner {
     @Autowired
     private SensorRepository sensorRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public void run(String... args) throws Exception {
         if (usuarioRepository.count() > 0) {
             System.out.println("=== DADOS JÁ EXISTEM NO BANCO ===");
             return;
         }
-        
+
         Local sp = new Local();
         sp.setNome("Centro de Monitoramento SP");
         sp.setCidade("São Paulo");
@@ -58,7 +54,7 @@ public class Seeder implements CommandLineRunner {
         admin.setNome("Administrador EcoSafe");
         admin.setEmail("admin@ecosafe.com");
         admin.setCpf("12345678901");
-        admin.setSenha(passwordEncoder.encode("123456"));
+        admin.setSenha("123456");
         admin.setLocalizacao(sp);
         usuarioRepository.save(admin);
 
@@ -66,7 +62,7 @@ public class Seeder implements CommandLineRunner {
         operador.setNome("João Silva");
         operador.setEmail("joao@ecosafe.com");
         operador.setCpf("98765432100");
-        operador.setSenha(passwordEncoder.encode("123456"));
+        operador.setSenha("123456");
         operador.setLocalizacao(rj);
         usuarioRepository.save(operador);
 
@@ -74,7 +70,7 @@ public class Seeder implements CommandLineRunner {
         tecnico.setNome("Maria Santos");
         tecnico.setEmail("maria@ecosafe.com");
         tecnico.setCpf("11122233344");
-        tecnico.setSenha(passwordEncoder.encode("123456"));
+        tecnico.setSenha("123456");
         tecnico.setLocalizacao(mg);
         usuarioRepository.save(tecnico);
 
@@ -120,4 +116,4 @@ public class Seeder implements CommandLineRunner {
         System.out.println("Sensores: 5 (diversos tipos)");
         System.out.println("================================");
     }
-} 
+}

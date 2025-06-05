@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres:16-alpine
+    container_name: eco-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: eco_safe
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ecosafe123!
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    container_name: eco-api
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/eco_safe
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ecosafe123!
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - backend
+
+volumes:
+  db_data:
+
+networks:
+  backend:

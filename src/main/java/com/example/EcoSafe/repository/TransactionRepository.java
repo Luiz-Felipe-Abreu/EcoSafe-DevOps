@@ -1,7 +1,7 @@
 package com.example.EcoSafe.repository;
 
 import com.example.EcoSafe.model.Transaction;
-import com.example.EcoSafe.model.User;
+import com.example.EcoSafe.model.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,10 +15,10 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     
-    Page<Transaction> findByUserOrderByTransactionDateDesc(User user, Pageable pageable);
+    Page<Transaction> findByUserOrderByTransactionDateDesc(Usuario user, Pageable pageable);
     
     List<Transaction> findByUserAndTransactionDateBetween(
-            User user, 
+            Usuario user, 
             LocalDateTime startDate, 
             LocalDateTime endDate
     );
@@ -28,9 +28,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
            "(:endDate IS NULL OR t.transactionDate <= :endDate) " +
            "ORDER BY t.transactionDate DESC")
     Page<Transaction> findByUserAndDateRange(
-            @Param("user") User user,
+            @Param("user") Usuario user,
             @Param("startDate") LocalDateTime startDate,
             @Param("endDate") LocalDateTime endDate,
             Pageable pageable
     );
-} 
+}

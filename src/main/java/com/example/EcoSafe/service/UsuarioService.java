@@ -5,7 +5,6 @@ import com.example.EcoSafe.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,9 +15,6 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public Usuario criarUsuario(Usuario usuario) {
         if (usuarioRepository.existsByEmail(usuario.getEmail())) {
             throw new RuntimeException("Email já está em uso");
@@ -26,7 +22,8 @@ public class UsuarioService {
         if (usuarioRepository.existsByCpf(usuario.getCpf())) {
             throw new RuntimeException("CPF já está em uso");
         }
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        // Salva a senha em texto puro (apenas para testes)
+        usuario.setSenha(usuario.getSenha());
         return usuarioRepository.save(usuario);
     }
 
@@ -53,15 +50,15 @@ public class UsuarioService {
         usuario.setEmail(usuarioAtualizado.getEmail());
         usuario.setCpf(usuarioAtualizado.getCpf());
         usuario.setLocalizacao(usuarioAtualizado.getLocalizacao());
-        
+
         if (usuarioAtualizado.getSenha() != null && !usuarioAtualizado.getSenha().isEmpty()) {
-            usuario.setSenha(passwordEncoder.encode(usuarioAtualizado.getSenha()));
+            usuario.setSenha(usuarioAtualizado.getSenha());
         }
-        
+
         return usuarioRepository.save(usuario);
     }
 
     public void deletarUsuario(Long id) {
         usuarioRepository.deleteById(id);
     }
-} 
+}
