@@ -7,16 +7,6 @@
 
 A proposta foca no **monitoramento de locais sensíveis** por meio de sensores e geração de **alertas automáticos** baseados nas leituras. Com isso, buscamos **ajudar comunidades vulneráveis**, fornecendo **informações em tempo real** para promover ações preventivas e respostas rápidas a desastres naturais.
 
-A aplicação oferece uma **API RESTful** robusta que gerencia:
-
-- Usuários  
-- Locais  
-- Sensores  
-- Leituras  
-- Alertas em tempo real  
-
-Integra-se a um banco de dados **PostgreSQL** conteinerizado, garantindo portabilidade e escalabilidade.
-
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -72,9 +62,60 @@ Esse comando irá:
 
 ### 📑 Acessar a API
 
-Com os containers rodando, acesse a documentação interativa via Swagger:
+Abaixo estão os principais endpoints disponíveis na API:
 
-👉 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+#### Usuários
+- `GET /usuarios` — Listar usuários
+- `GET /usuarios/{id}` — Buscar usuário por ID
+- `PUT /usuarios/{id}` — Atualizar usuário
+- `DELETE /usuarios/{id}` — Remover usuário
+
+#### Locais
+- `GET /locais` — Listar locais
+- `POST /locais` — Cadastrar novo local
+- `GET /locais/{id}` — Buscar local por ID
+- `PUT /locais/{id}` — Atualizar local
+- `DELETE /locais/{id}` — Remover local
+
+#### Sensores
+- `GET /sensores` — Listar sensores
+- `POST /sensores` — Cadastrar novo sensor
+- `GET /sensores/{id}` — Buscar sensor por ID
+- `PUT /sensores/{id}` — Atualizar sensor
+- `DELETE /sensores/{id}` — Remover sensor
+
+#### Leituras
+- `GET /leituras` — Listar leituras
+- `POST /leituras` — Registrar nova leitura
+- `GET /leituras/{id}` — Buscar leitura por ID
+
+#### Alertas
+- `GET /alertas` — Listar alertas
+- `GET /alertas/{id}` — Buscar alerta por ID
+
+---
+
+### 🗄️ Acessar o Banco de Dados PostgreSQL
+
+Siga os passos abaixo para acessar o banco de dados, consultar tabelas e sair:
+
+1. **Acesse o container do banco de dados via terminal:**
+
+   ```bash
+   docker exec -it eco-postgres psql -U postgres -d eco_safe
+   ```
+
+2. **Liste os dados de uma tabela (substitua `nome_da_tabela` pelo nome desejado):**
+
+   ```sql
+   SELECT * FROM nome_da_tabela;
+   ```
+
+3. **Para sair do PostgreSQL, digite:**
+
+   ```
+   \q
+   ```
 
 ---
 
@@ -92,7 +133,6 @@ docker-compose down -v
 
 ## ✅ Funcionalidades Implementadas
 
-- 🔐 Registro e login de usuários com **autenticação JWT**
 - 📍 **Cadastro de locais e sensores**
 - 📈 **Registro de leituras dos sensores**
 - 🚨 **Geração de alertas automáticos** com associação aos usuários
@@ -101,7 +141,6 @@ docker-compose down -v
   - Local
   - Sensor
   - Alerta
-- 🧪 Documentação interativa da API via **Swagger**
 
 ---
 
@@ -126,27 +165,22 @@ docker-compose down -v
 ├── README.md
 └── pom.xml
 ```
-
 ---
 
 ## 👥 Equipe
 
 | Nome               | RM        |
 | ------------------ | --------- |
-| [Seu Nome]         | [Seu RM]  |
-| [Integrante 2]     | [RM]      |
-| [Integrante 3]     | [RM]      |
-| [Integrante 4]     | [RM]      |
+| Luiz Felipe         | 555197  |
+| Pedro Gomes     | 553907      |
+| Matheus Munuera     | 557812      |
+
 
 ---
 
 ## 📹 Extras
 
 - 🎥 **Vídeo demonstrativo:** [Link aqui (quando disponível)]  
-- 🔗 **Repositório:** [https://github.com/seu-usuario/ecosafe](https://github.com/seu-usuario/ecosafe)  
 
----
+---/
 
-## 🤝 Licença
-
-Este projeto é de uso acadêmico para a FIAP e não possui fins comerciais.'
