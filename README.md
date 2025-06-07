@@ -62,36 +62,42 @@ Esse comando irá:
 
 ### 📑 Acessar a API
 
-Abaixo estão os principais endpoints disponíveis na API:
+Abaixo estão os principais endpoints disponíveis na API (exemplo de URL: `http://localhost:8080`):
 
 #### Usuários
-- `GET /usuarios` — Listar usuários
-- `GET /usuarios/{id}` — Buscar usuário por ID
-- `PUT /usuarios/{id}` — Atualizar usuário
-- `DELETE /usuarios/{id}` — Remover usuário
+- `GET http://localhost:8080/api/usuarios` — Listar usuários (paginado)
+- `GET http://localhost:8080/api/usuarios/{id}` — Buscar usuário por ID
+- `POST http://localhost:8080/api/usuarios` — Cadastrar novo usuário
+- `PUT http://localhost:8080/api/usuarios/{id}` — Atualizar usuário
+- `DELETE http://localhost:8080/api/usuarios/{id}` — Remover usuário
+- `GET http://localhost:8080/api/usuarios/buscar?nome={nome}` — Buscar usuários por nome (paginado)
 
 #### Locais
-- `GET /locais` — Listar locais
-- `POST /locais` — Cadastrar novo local
-- `GET /locais/{id}` — Buscar local por ID
-- `PUT /locais/{id}` — Atualizar local
-- `DELETE /locais/{id}` — Remover local
+- `GET http://localhost:8080/api/locais` — Listar locais (paginado)
+- `GET http://localhost:8080/api/locais/{id}` — Buscar local por ID
+- `POST http://localhost:8080/api/locais` — Cadastrar novo local
+- `PUT http://localhost:8080/api/locais/{id}` — Atualizar local
+- `DELETE http://localhost:8080/api/locais/{id}` — Remover local
+- `GET http://localhost:8080/api/locais/buscar/cidade?cidade={cidade}` — Buscar locais por cidade (paginado)
 
 #### Sensores
-- `GET /sensores` — Listar sensores
-- `POST /sensores` — Cadastrar novo sensor
-- `GET /sensores/{id}` — Buscar sensor por ID
-- `PUT /sensores/{id}` — Atualizar sensor
-- `DELETE /sensores/{id}` — Remover sensor
+- `GET http://localhost:8080/api/sensores` — Listar sensores (paginado)
+- `GET http://localhost:8080/api/sensores/{id}` — Buscar sensor por ID
+- `POST http://localhost:8080/api/sensores` — Cadastrar novo sensor
+- `PUT http://localhost:8080/api/sensores/{id}` — Atualizar sensor
+- `DELETE http://localhost:8080/api/sensores/{id}` — Remover sensor
+- `GET http://localhost:8080/api/sensores/buscar/tipo?tipo={tipo}` — Buscar sensores por tipo (paginado)
+- `GET http://localhost:8080/api/sensores/buscar/status?status={status}` — Buscar sensores por status (paginado)
 
 #### Leituras
-- `GET /leituras` — Listar leituras
-- `POST /leituras` — Registrar nova leitura
-- `GET /leituras/{id}` — Buscar leitura por ID
+- `GET http://localhost:8080/api/leituras` — Listar leituras (paginado)
+- `GET http://localhost:8080/api/leituras/{id}` — Buscar leitura por ID
+- `POST http://localhost:8080/api/leituras` — Registrar nova leitura
+- `GET http://localhost:8080/api/leituras/buscar?sensorId={id}` — Buscar leituras por sensor (paginado)
 
 #### Alertas
-- `GET /alertas` — Listar alertas
-- `GET /alertas/{id}` — Buscar alerta por ID
+- `GET http://localhost:8080/api/alertas` — Listar alertas (paginado)
+- `GET http://localhost:8080/api/alertas/{id}` — Buscar alerta por ID
 
 ---
 
@@ -180,7 +186,7 @@ docker-compose down -v
 
 ## 📹 Extras
 
-- 🎥 **Vídeo demonstrativo:** [Link aqui (quando disponível)]  
+- 🎥 **Vídeo demonstrativo:** https://www.youtube.com/watch?v=vkDcPXFDwvU&ab_channel=LuizFelipe
 
 ---/
 
